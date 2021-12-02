@@ -3,12 +3,8 @@ import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-auto
 import {GoSearch} from "react-icons/go";
 import {useAppSelector} from "@/hooks";
 import cn from "classnames";
-import {TLocation} from "@/types";
+import {Direction, TLocation} from "@/types";
 
-export enum Direction {
-  'FROM',
-  'TO'
-}
 
 interface ISearchPlaceInput {
   type: Direction.FROM | Direction.TO,

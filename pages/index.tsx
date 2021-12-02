@@ -1,25 +1,16 @@
 import React from 'react';
 import {NextPage} from "next";
 import Layout from "@/components/layouts/Layout";
-import MyMap from "@/components/home/MyMap";
-import {GoSearch} from 'react-icons/go'
-import ButtonOrder from "@/components/home/ButtonOrder";
+import {ButtonOrder, InputPlaceFrom, InputPlaceTo, MyMap} from "@/components/home";
 
 
 const Home: NextPage = () => {
   return (
     <Layout title={"My taxi | app"}>
       <MyMap/>
-      <section className="max-w-xl absolute p-2 mx-auto bottom-5 inset-x-2 sm:left-5 sm:right-5">
-        <div className="rounded-md w-full shadow-md bg-white px-3 py-3 mb-5 flex items-center">
-          <GoSearch color='#724B99' size={20} className="mr-3"/>
-          <input className=" w-full outline-none text-gray-900 font-medium pr-1" type="text"/>
-        </div>
-        <div className="rounded-md w-full shadow-md bg-white px-3 py-3 mb-5 flex items-center">
-          <GoSearch color='#000' size={20} className="mr-3"/>
-          <input className=" w-full outline-none text-gray-900 font-medium pr-1" type="text"/>
-          <span className="text-gray-400 text-sm absolute right-4">5 min</span>
-        </div>
+      <section className="max-w-xl absolute mx-auto bottom-5 inset-x-2 sm:left-5 sm:right-5">
+        <InputPlaceFrom/>
+        <InputPlaceTo/>
         <div className="mb-5 flex flex-nowrap overflow-x-scroll hidden-scroll">
           <ul className="flex flex-nowrap">
             {
@@ -32,7 +23,7 @@ const Home: NextPage = () => {
             }
           </ul>
         </div>
-        <ButtonOrder />
+        <ButtonOrder/>
       </section>
     </Layout>
   );

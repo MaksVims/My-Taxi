@@ -38,7 +38,7 @@ const Layout: FC<ILayout> = ({children, title}) => {
         src={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`}
         strategy={"beforeInteractive"}
       />
-      <div className="w-screen h-screen">
+      <div className="w-screen h-screen relative overflow-hidden">
         {userLocationLoading || isPreloaderShow ? <Image src={preLoaderImg.src} priority layout="fill"/> : children}
       </div>
     </>

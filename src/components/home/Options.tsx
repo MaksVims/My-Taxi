@@ -14,7 +14,7 @@ const Options: FC<IOptions> = ({options}) => {
 
   return (
     <div className="mb-5 flex flex-nowrap overflow-x-scroll hidden-scroll">
-      <ul className="flex flex-nowrap w-full">
+      <ul className="flex flex-nowrap w-full xl:justify-between">
         {options.map(option => (
           <li
             className="mr-3 last:mr-0 bg-white cursor-pointer rounded-md flex-shrink-0"
@@ -25,6 +25,7 @@ const Options: FC<IOptions> = ({options}) => {
               className={cn('w-full p-2 text-left transition-opacity opacity-1 duration-300 outline-none',
                 {'opacity-50 transition-opacity duration-300': selectedOption !== option.title})}
               onClick={() => setSelectedOption(option.title)}
+              onPointerDown={e => e.preventDefault()}
             >
               <div className="mx-auto relative w-9 h-9 md:h-11 md:w-11 mb-1">
                 <Image

@@ -1,15 +1,15 @@
 
-export type TLocation = {
+export interface TLocation {
   lat: number,
   lng: number
 }
 
-export type TGeoPosition = {
+export interface TGeoPosition  {
   address: string,
   location: TLocation
 }
 
-export type TTaxiState = {
+export interface TTaxiState {
   userPlaceLocation: TLocation,
   currentLocation: TLocation,
   from: TGeoPosition,

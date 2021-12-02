@@ -27,7 +27,7 @@ const SearchPlaceInput: FC<ISearchPlaceInput> = ({type, cbSelectedAddress}) => {
   const inputFocus = () => inputRef?.current?.focus()
 
   useEffect(() => {
-    inputRef?.current?.focus()
+    if (!isTo) inputRef?.current?.focus()
   }, [])
 
   return (

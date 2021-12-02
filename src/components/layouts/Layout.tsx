@@ -10,7 +10,7 @@ interface ILayout {
   title: string
 }
 
-const API_KEY = process.env.GOOGLE_API_KEY
+export const API_KEY = process.env.GOOGLE_API_KEY
 
 const Layout: FC<ILayout> = ({children, title}) => {
   const {setUserPlaceLocation, setCurrentLocation} = useActions()

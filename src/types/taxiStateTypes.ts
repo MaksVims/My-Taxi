@@ -14,6 +14,7 @@ export interface TTaxiState {
   currentLocation: TLocation,
   from: TGeoPosition,
   to: TGeoPosition,
-  tripTime: number,
-  tripDistance: number
+  travelTime: number,
+  travelDistance: number,
+  selectedOption: string
 }

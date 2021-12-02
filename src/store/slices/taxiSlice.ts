@@ -6,8 +6,9 @@ const initialState: TTaxiState = {
   to: {} as TGeoPosition,
   currentLocation: {} as TLocation,
   userPlaceLocation: {} as TLocation,
-  tripDistance: 0,
-  tripTime: 0
+  travelDistance: 0,
+  travelTime: 0,
+  selectedOption: ''
 }
 
 const taxiSlice = createSlice({
@@ -26,11 +27,14 @@ const taxiSlice = createSlice({
     setUserPlaceLocation:(state, action) => {
       state.userPlaceLocation = action.payload
     },
-    setTripDistance:(state, action) => {
-      state.tripDistance = action.payload
+    setTravelDistance:(state, action) => {
+      state.travelDistance = action.payload
     },
-    setTripTime:(state, action) => {
-      state.tripTime = action.payload
+    setTravelTime:(state, action) => {
+      state.travelTime = action.payload
+    },
+    setSelectedOption:(state, action) => {
+      state.selectedOption = action.payload
     }
   }
 })

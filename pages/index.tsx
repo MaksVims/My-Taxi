@@ -3,6 +3,7 @@ import {NextPage} from "next";
 import Layout from "@/components/layouts/Layout";
 import MyMap from "@/components/home/MyMap";
 import {GoSearch} from 'react-icons/go'
+import ButtonOrder from "@/components/home/ButtonOrder";
 
 
 const Home: NextPage = () => {
@@ -31,9 +32,7 @@ const Home: NextPage = () => {
             }
           </ul>
         </div>
-        <button className=" bg-black text-white block mx-auto w-2/3 py-1 rounded-md max-w-sm">
-          Click
-        </button>
+        <ButtonOrder />
       </section>
     </Layout>
   );

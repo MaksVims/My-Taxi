@@ -1,15 +1,16 @@
 import React, {FC} from 'react';
-import {IOption} from "../../../pages/api/types";
+import {IOption} from "$/api/types";
 import Image from "next/image";
 import {useActions, useAppSelector} from "@/hooks";
 import cn from "classnames";
+import {getFormatTravelPrice} from "@/utils";
 
 interface IOptions {
   options: IOption[]
 }
 
 const Options: FC<IOptions> = ({options}) => {
-  const {selectedOption} = useAppSelector(state => state.taxi)
+  const {selectedOption, travelTime} = useAppSelector(state => state.taxi)
   const {setSelectedOption} = useActions()
 
   return (
@@ -36,7 +37,9 @@ const Options: FC<IOptions> = ({options}) => {
                 />
               </div>
               <span className="block text-gray-500 text-sm">{option.title}</span>
-              <span className="text-black font-semibold">22 563.00 p</span>
+              <span className="text-black font-semibold">
+                {getFormatTravelPrice(option.multiplier, travelTime)}
+              </span>
             </button>
           </li>
         ))}

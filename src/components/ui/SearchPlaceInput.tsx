@@ -4,6 +4,7 @@ import {GoSearch} from "react-icons/go";
 import {useAppSelector} from "@/hooks";
 import cn from "classnames";
 import {Direction, TLocation} from "@/types";
+import {getFormatTravelTime} from "@/utils";
 
 
 interface ISearchPlaceInput {
@@ -55,7 +56,11 @@ const SearchPlaceInput: FC<ISearchPlaceInput> = ({type, cbSelectedAddress}) => {
                 className: 'w-full outline-none text-gray-900 font-medium pr-1'
               })}
             />
-            {isTo && travelTime !== 0 && <span className="text-gray-400 text-sm absolute right-4">5 min</span>}
+            {isTo && travelTime !== 0 &&
+            <span className="text-gray-400 text-sm absolute right-4">
+              {getFormatTravelTime(travelTime)}
+            </span>
+            }
           </div>
           <div className={cn('bg-white absolute h-0 inset-x-0 overflow-y-auto z-20', {
             'h-48 p-2': loading || suggestions.length
@@ -70,6 +75,7 @@ const SearchPlaceInput: FC<ISearchPlaceInput> = ({type, cbSelectedAddress}) => {
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {className: variantClass})}
+                    key={suggestion.placeId}
                   >
                     <span className="text-xl">{suggestion.description}</span>
                   </div>

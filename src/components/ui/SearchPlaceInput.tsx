@@ -53,11 +53,11 @@ const SearchPlaceInput: FC<ISearchPlaceInput> = ({type, cbSelectedAddress}) => {
                 ref: inputRef,
                 type: "text",
                 placeholder: isTo ? 'Куда едем?' : 'Откуда?',
-                className: 'w-full outline-none text-gray-900 font-medium pr-1'
+                className: 'w-full outline-none text-gray-900 font-medium pr-2'
               })}
             />
             {isTo && travelTime !== 0 &&
-            <span className="text-gray-400 text-sm absolute right-4">
+            <span className="text-gray-400 text-sm right-2 whitespace-nowrap">
               {getFormatTravelTime(travelTime)}
             </span>
             }

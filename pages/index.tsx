@@ -28,7 +28,7 @@ interface IHome {
 const Home: NextPage<IHome> = ({options}) => {
   return (
     <Layout title={"My taxi | app"}>
-      <MyMap/>
+      <MyMap options={options}/>
       <section
         className="max-w-xl absolute mx-auto bottom-5 inset-x-2 sm:left-5 sm:right-5"
         style={{maxWidth: 600}}

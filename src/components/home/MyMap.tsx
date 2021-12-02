@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import GoogleMapReact from 'google-map-react';
 import {useActions, useAppSelector} from "@/hooks";
 import {IOption} from "$/api/types";
@@ -26,15 +26,22 @@ const MyMap: FC<IMyMap> = ({options}) => {
     userPlaceLocation: defaultCenter,
     currentLocation: center,
     from,
-    to
+    to,
+    selectedOption
   } = useAppSelector(state => state.taxi)
   const {setTravelDistance, setTravelTime, setSelectedOption} = useActions()
   const [displayMap, setDisplayMap] = useState<IMap>()
 
+  //save directionRender for clear old map route
+  const directionRenderRef = useRef<google.maps.DirectionsRenderer>()
+
   const renderPath = async () => {
+    if (directionRenderRef.current) directionRenderRef.current?.setMap(null)
+
     if (displayMap) {
       const directionsRenderer: google.maps.DirectionsRenderer = new google.maps.DirectionsRenderer()
       const directionsService: google.maps.DirectionsService = new google.maps.DirectionsService()
+      directionRenderRef.current = directionsRenderer
 
       try {
         const route = await directionsService.route({
@@ -50,6 +57,9 @@ const MyMap: FC<IMyMap> = ({options}) => {
         if (travelDistance && travelTime) {
           setTravelTime(Math.round(travelTime / 60))
           setTravelDistance(travelDistance)
+        }
+
+        if (!selectedOption) {
           setSelectedOption(options[0].title)
         }
 

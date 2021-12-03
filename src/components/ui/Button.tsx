@@ -12,4 +12,4 @@ const Button: FC<IButton> = ({children, clickHandler, ...props}) => {
   );
 };
 
-export default Button;
+export default React.memo(Button);

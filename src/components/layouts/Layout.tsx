@@ -10,11 +10,10 @@ interface ILayout {
   title: string
 }
 
-export const API_KEY = process.env.GOOGLE_API_KEY
-
 const Layout: FC<ILayout> = ({children, title}) => {
   const {setUserPlaceLocation, setCurrentLocation} = useActions()
   const [isPreloaderShow, setIsPreloaderShow] = useState<boolean>(false)
+
   const userLocationLoading = useCurrentLocation((position: GeolocationPosition) => {
     const location = {lat: position.coords.latitude, lng: position.coords.longitude}
     setCurrentLocation(location)
@@ -35,7 +34,7 @@ const Layout: FC<ILayout> = ({children, title}) => {
         <link rel="shortcut icon" href={faviconImg.src} type="image/x-icon"/>
       </Head>
       <Script
-        src={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`}
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&libraries=places`}
         strategy={"beforeInteractive"}
       />
       <div className="w-screen h-screen relative overflow-hidden">

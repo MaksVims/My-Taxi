@@ -5,7 +5,11 @@ import Image from "next/image";
 const Preloader: FC = () => {
   return (
     <>
-      <Image src={preLoaderImg.src} priority layout="fill"/>
+      <Image
+        src={preLoaderImg.src}
+        priority
+        layout="fill"
+      />
     </>
   );
 };

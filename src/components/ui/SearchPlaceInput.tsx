@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 import {GoSearch} from "react-icons/go";
 import {useAppSelector} from "@/hooks";
@@ -19,12 +19,12 @@ const SearchPlaceInput: FC<ISearchPlaceInput> = ({type, cbSelectedAddress}) => {
   const isTo = type === Direction.TO
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handlerSelectedAddress = async (address: string) => {
+  const handlerSelectedAddress = useCallback(async (address: string) => {
     const results = await geocodeByAddress(address)
     const location = await getLatLng(results[0])
     setAddress(address)
     cbSelectedAddress(address, location)
-  }
+  }, [setAddress])
 
   const inputFocus = () => inputRef?.current?.focus()
 
@@ -67,22 +67,22 @@ const SearchPlaceInput: FC<ISearchPlaceInput> = ({type, cbSelectedAddress}) => {
             'h-48 p-2': loading || suggestions.length
           })}>
             {loading && <AddressLoader/>}
-            {
-              suggestions.map(suggestion => {
-                const variantClass = cn({
-                  'bg-gray-300': suggestion.active,
-                  'bg-white p-2 cursor-pointer': true
-                })
-                return (
-                  <div
-                    {...getSuggestionItemProps(suggestion, {className: variantClass})}
-                    key={suggestion.placeId}
-                  >
-                    <span className="text-xl">{suggestion.description}</span>
-                  </div>
-                )
+            {suggestions.map(suggestion => {
+              const variantClass = cn({
+                'bg-gray-300': suggestion.active,
+                'bg-white p-2 cursor-pointer': true
               })
-            }
+              return (
+                <div
+                  {...getSuggestionItemProps(suggestion, {className: variantClass})}
+                  key={suggestion.placeId}
+                >
+                  <span className="text-xl">
+                    {suggestion.description}
+                  </span>
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
@@ -90,4 +90,4 @@ const SearchPlaceInput: FC<ISearchPlaceInput> = ({type, cbSelectedAddress}) => {
   );
 };
 
-export default SearchPlaceInput;
+export default React.memo(SearchPlaceInput);

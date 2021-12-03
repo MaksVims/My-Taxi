@@ -36,7 +36,9 @@ const Options: FC<IOptions> = ({options}) => {
                   className="flex-shrink-0"
                 />
               </div>
-              <span className="block text-gray-500 text-sm">{option.title}</span>
+              <span className="block text-gray-500 text-sm">
+                {option.title}
+              </span>
               <span className="text-black font-semibold">
                 {getFormatTravelPrice(option.multiplier, travelTime)}
               </span>
@@ -48,4 +50,4 @@ const Options: FC<IOptions> = ({options}) => {
   );
 };
 
-export default Options;
+export default React.memo(Options);

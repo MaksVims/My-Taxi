@@ -3,15 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import {useActions, useAppSelector} from "@/hooks";
 import {IOption} from "$/api/types";
 import ButtonHomeLocation from "@/components/home/ButtonHomeLocation";
-
-
-const mapOptions = {
-  keyboardShortcuts: false,
-  fullscreenControl: false,
-  zoomControl: false,
-  clickableIcons: false,
-  disableDoubleClickZoom: true
-}
+import {MAP_OPTIONS} from "@/const";
 
 interface IMap {
   map: google.maps.Map,
@@ -23,13 +15,7 @@ interface IMyMap {
 }
 
 const MyMap: FC<IMyMap> = ({options}) => {
-  const {
-    userPlaceLocation: defaultCenter,
-    currentLocation: center,
-    from,
-    to,
-    selectedOption
-  } = useAppSelector(state => state.taxi)
+  const {currentLocation: center, from, to, selectedOption} = useAppSelector(state => state.taxi)
   const {setTravelDistance, setTravelTime, setSelectedOption} = useActions()
   const [displayMap, setDisplayMap] = useState<IMap>({} as IMap)
 
@@ -60,9 +46,7 @@ const MyMap: FC<IMyMap> = ({options}) => {
           setTravelDistance(travelDistance)
         }
 
-        if (!selectedOption) {
-          setSelectedOption(options[0].title)
-        }
+        if (!selectedOption) setSelectedOption(options[0].title)
 
         directionsRenderer.setOptions({markerOptions: {clickable: false}})
         directionsRenderer.setMap(displayMap.map)
@@ -82,16 +66,15 @@ const MyMap: FC<IMyMap> = ({options}) => {
     <div className="fixed inset-0">
       <GoogleMapReact
         bootstrapURLKeys={{key: String(process.env.GOOGLE_API_KEY)}}
-        defaultCenter={defaultCenter}
         center={center}
         defaultZoom={13}
-        options={mapOptions}
+        options={MAP_OPTIONS}
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={setDisplayMap}
       />
-      <ButtonHomeLocation displayMap={displayMap?.map} />
+      <ButtonHomeLocation displayMap={displayMap?.map}/>
     </div>
   );
 };
 
-export default MyMap;
+export default React.memo(MyMap);

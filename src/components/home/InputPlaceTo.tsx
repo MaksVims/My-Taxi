@@ -1,17 +1,21 @@
-import React, {FC} from 'react';
+import React, {FC, useCallback} from 'react';
 import {Direction, TLocation} from "@/types";
 import SearchPlaceInput from "@/components/ui/SearchPlaceInput";
 import {useActions} from "@/hooks";
 
 const InputPlaceTo: FC = () => {
   const {setTo} = useActions()
-  const callbackSelectedAddress = (address: string, location: TLocation) => {
+
+  const callbackSelectedAddress = useCallback((address: string, location: TLocation) => {
     setTo({address, location})
-  }
+  }, [])
 
   return (
-    <SearchPlaceInput type={Direction.TO} cbSelectedAddress={callbackSelectedAddress} />
+    <SearchPlaceInput
+      type={Direction.TO}
+      cbSelectedAddress={callbackSelectedAddress}
+    />
   );
 };
 
-export default InputPlaceTo;
+export default React.memo(InputPlaceTo);

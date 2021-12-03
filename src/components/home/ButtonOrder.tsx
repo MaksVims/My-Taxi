@@ -2,13 +2,15 @@ import React, {FC, useCallback} from 'react';
 import Button from "@/components/ui/Button";
 import cn from 'classnames'
 import {useAppSelector} from "@/hooks";
+import {ToastType, useToast} from '@/contexts';
 
 const ButtonOrder: FC = () => {
   const {selectedOption, travelTime} = useAppSelector(state => state.taxi)
+  const {showToast} = useToast()
 
   const handlerOrdered = useCallback(() => {
-    console.log('Order')
-  }, [])
+    showToast(`Спасибо за заказ`, ToastType.SUCCESS)
+  }, [showToast])
 
   const classBtnOrder = cn({
     'bg-gray-600 cursor-not-allowed text-gray-300': !selectedOption || !travelTime,

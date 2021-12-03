@@ -4,6 +4,7 @@ import {useActions, useAppSelector} from "@/hooks";
 import {IOption} from "$/api/types";
 import ButtonHomeLocation from "@/components/home/ButtonHomeLocation";
 import {MAP_OPTIONS} from "@/const";
+import {ToastType, useToast} from "@/contexts";
 
 interface IMap {
   map: google.maps.Map,
@@ -18,6 +19,7 @@ const MyMap: FC<IMyMap> = ({options}) => {
   const {currentLocation: center, from, to, selectedOption} = useAppSelector(state => state.taxi)
   const {setTravelDistance, setTravelTime, setSelectedOption} = useActions()
   const [displayMap, setDisplayMap] = useState<IMap>({} as IMap)
+  const {showToast} = useToast()
 
   //save directionRender for clear old map route
   const directionRenderRef = useRef<google.maps.DirectionsRenderer>()
@@ -51,7 +53,7 @@ const MyMap: FC<IMyMap> = ({options}) => {
         directionsRenderer.setOptions({markerOptions: {clickable: false}})
         directionsRenderer.setMap(displayMap.map)
       } catch (e) {
-        alert(e)
+        showToast('Ошибка: невозможно проложить маршрут', ToastType.ERROR)
       }
     }
   }

@@ -5,6 +5,7 @@ import {useAppSelector} from "@/hooks";
 import cn from "classnames";
 import {Direction, TLocation} from "@/types";
 import {getFormatTravelTime} from "@/utils";
+import AddressLoader from "@/components/ui/AddressLoader";
 
 
 interface ISearchPlaceInput {
@@ -65,7 +66,7 @@ const SearchPlaceInput: FC<ISearchPlaceInput> = ({type, cbSelectedAddress}) => {
           <div className={cn('bg-white absolute h-0 inset-x-0 overflow-y-auto z-20', {
             'h-48 p-2': loading || suggestions.length
           })}>
-            {loading && <div>Loading</div>}
+            {loading && <AddressLoader/>}
             {
               suggestions.map(suggestion => {
                 const variantClass = cn({

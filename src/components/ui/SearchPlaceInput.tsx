@@ -46,7 +46,7 @@ const SearchPlaceInput: FC<ISearchPlaceInput> = ({type, cbSelectedAddress}) => {
             <GoSearch
               color={isTo ? '#000' : '#724B99'}
               size={20}
-              className="mr-3"
+              className="mr-3 flex-shrink-0"
             />
             <input
               {...getInputProps({

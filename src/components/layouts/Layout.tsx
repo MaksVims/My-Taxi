@@ -32,7 +32,7 @@ const Layout: FC<ILayout> = ({children, title}) => {
       <Head>
         <title>{title}</title>
         <meta name="description" content={`Page or ${title}`}/>
-        <link rel="shortcut icon" href={faviconImg.src} type="image/icon"/>
+        <link rel="shortcut icon" href={faviconImg.src} type="image/x-icon"/>
       </Head>
       <Script
         src={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`}

@@ -12,7 +12,8 @@ const ButtonOrder: FC = () => {
   const classBtnOrder = cn({
     'bg-gray-600 cursor-not-allowed text-gray-300': !selectedOption || !travelTime,
     'bg-black text-sm text-white tracking-wider font-semibold uppercase block mx-auto w-2/3 py-1.5 rounded-md max-w-sm': true,
-    'md:text-xl shadow-md': true
+    'md:text-xl shadow-md': true,
+    'hover:opacity-90 focus:opacity-90': selectedOption && travelTime
   })
 
   return (

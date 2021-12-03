@@ -2,6 +2,7 @@ import React, {FC, useEffect, useRef, useState} from 'react';
 import GoogleMapReact from 'google-map-react';
 import {useActions, useAppSelector} from "@/hooks";
 import {IOption} from "$/api/types";
+import ButtonHomeLocation from "@/components/home/ButtonHomeLocation";
 
 
 const mapOptions = {
@@ -30,7 +31,7 @@ const MyMap: FC<IMyMap> = ({options}) => {
     selectedOption
   } = useAppSelector(state => state.taxi)
   const {setTravelDistance, setTravelTime, setSelectedOption} = useActions()
-  const [displayMap, setDisplayMap] = useState<IMap>()
+  const [displayMap, setDisplayMap] = useState<IMap>({} as IMap)
 
   //save directionRender for clear old map route
   const directionRenderRef = useRef<google.maps.DirectionsRenderer>()
@@ -88,6 +89,7 @@ const MyMap: FC<IMyMap> = ({options}) => {
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={setDisplayMap}
       />
+      <ButtonHomeLocation displayMap={displayMap?.map} />
     </div>
   );
 };
